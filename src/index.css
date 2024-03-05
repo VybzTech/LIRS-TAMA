@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: Rubik;
+  font-optical-sizing: auto;
+  font-style: normal;
+  /* font-family: Rubik,; */
+  src: url("./assets/fonts/Rubik/Rubik-VariableFont_wght.ttf");
+}
+
+* {
+  font-family: Rubik, sans-serif;
+  @apply m-0 p-0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+#Navbar {
+  background-image: url("./assets/images/Bus.png");
+  min-width: 35vw;
+  width: 35%;
+  background-size: 35vw 100vh;
+  background-attachment: fixed;
+  position: relative;
+  background-repeat: no-repeat;
+}
+h1 {
+  @apply text-xl font-semibold;
+}
+.Nav > div > span {
+  -webkit-text-stroke: 0.2px #555;
+}
+.flexMe {
+  @apply flex items-center;
+}
+.textShade {
+  -webkit-text-stroke: 0.15px #585858;
+}
+label {
+  -webkit-text-stroke: 0.3px #111;
+}
+
+input[type="file"] {
+}
+input[type="file"]::-webkit-file-upload-button {
+  display: none;
+}
+input[type="file"]::file-selector-button {
+  display: none;
+}
+#NavContent.stick {
+  position: sticky;
+  top: 3.5%;
+}
+.disabled-btn {
+  cursor: not-allowed;
+  @apply bg-blue-400 text-gray-200 hover:bg-blue-400 text-white !important;
+}
+.textShade{
+  /* text-shadow: 1.5px 0.5px 1px #1113; */
+}
