@@ -48,35 +48,35 @@ const Container2 = () => {
   const validationSchema = Yup.object().shape({
     director1Details_ID: Yup.string()
       .min(4, "Incomplete Payer ID")
-      .matches(/^N-\w{3,}$/i, "Invalid Payer ID format")
+      .matches(/^n-\w{3,}$/i, "Invalid Payer ID format")
       .required("Kindly verify your Director's Payer ID"),
     director1Details: Yup.string()
       .min(5, "Incomplete details")
       .required("Kindly verify your 1st Director's details"),
     director2Details_ID: Yup.string()
       .min(4, "Incomplete Payer ID")
-      .matches(/^N-\w{3,}$/i, "Invalid Payer ID format")
+      .matches(/^n-\w{3,}$/i, "Invalid Payer ID format")
       .required("Kindly verify your Director's Payer ID"),
     director2Details: Yup.string()
       .min(5, "Incomplete details")
       .required("Kindly verify your 2nd Director's details"),
     Officer1Details_ID: Yup.string()
       .min(4, "Incomplete Payer ID")
-      .matches(/^N-\w{3,}$/i, "Invalid Payer ID format")
+      .matches(/^n-\w{3,}$/i, "Invalid Payer ID format")
       .required("Kindly verify your Officer's Payer ID"),
     Officer1Details: Yup.string()
       .min(5, "Incomplete details")
       .required("Kindly verify your 1st Officer's details"),
     Officer2Details_ID: Yup.string()
       .min(4, "Incomplete Payer ID")
-      .matches(/^N-\w{3,}$/i, "Invalid Payer ID format")
+      .matches(/^n-\w{3,}$/i, "Invalid Payer ID format")
       .required("Kindly verify your Officer's Payer ID"),
     Officer2Details: Yup.string()
       .min(5, "Incomplete details")
       .required("Kindly verify your 2nd Officer's details"),
     Officer3Details_ID: Yup.string()
       .min(4, "Incomplete Payer ID")
-      .matches(/^N-\w{3,}$/i, "Invalid Payer ID format")
+      .matches(/^n-\w{3,}$/i, "Invalid Payer ID format")
       .required("Kindly verify your Officer's Payer ID"),
     Officer3Details: Yup.string()
       .min(5, "Incomplete details")

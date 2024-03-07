@@ -1,13 +1,16 @@
 import Container1 from "./Container1.jsx";
-import Container2 from "./Container2.js";
-import Container3 from "./Container3.js";
-import Container4 from "./Container4.js";
-import Confirmation from "./Confirmation.js";
+import Container2 from "./Container2.tsx";
+import Container3 from "./Container3.tsx";
+import Container4 from "./Container4.tsx";
+// import Confirmation from "./Confirmation.js";
 import { useStatus } from "../context/StatusContext.js";
 
 const Body = () => {
-  const { status, setStatus } = useStatus();
+  const { status } = useStatus();
   // ('Verified', 'Validated', 'Uploaded', 'Completed') Verification
+  //  let navigate;useEffect(() => {
+  //    navigate = useNavigate();
+  //  }, [status])
 
   switch (status) {
     case "Verified":
@@ -19,11 +22,12 @@ const Body = () => {
     case "Uploaded":
       return <Container4 />;
       break;
-    case "Completed":
-      return <Confirmation />;
+      // case "Completed":
+      //   return navigate("/Completed");
+      // <Confirmation />;
       break;
     default:
-      return <Container3 />;
+      return <Container1 />;
       break;
   }
 };

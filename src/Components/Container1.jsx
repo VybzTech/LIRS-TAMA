@@ -85,8 +85,8 @@ const Container1 = () => {
   const submitForm = async (values, actions) => {
     // (values) => {
     // e.preventDefault();
-    // console.log(values);
-    console.log(actions);
+    console.log(values);
+    // console.log(actions);
     setSubmitted(true);
     // setVdirectors(values);
     // response = [{"tccNo": "LA/TCC/2FDH34HJ56NF7M90","PayerID": "N-417293",

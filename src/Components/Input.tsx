@@ -21,7 +21,7 @@ const Input = ({
 }: InputProps) => {
   if (asComponent === "textarea") {
     return (
-      <div className="formGroup w-full">
+      <div className="w-full">
         <div className="flex items-center justify-between mb-1.5">
           <label className="text-[13.5px] text-[#111]" htmlFor={label}>
             {label}
@@ -39,7 +39,7 @@ const Input = ({
     );
   } else {
     return (
-      <div className="formGroup w-full">
+      <div className="w-full">
         <div className="flex items-center justify-between mb-1.5">
           <label className="text-[13.5px] text-[#111]" htmlFor={label}>
             {label}

@@ -50,7 +50,7 @@ const Nav = ({ id, title, content, poll, step, active }: propsType) => {
       {/* <div className={`rec bg-[blue] w-2 h-24`}></div> */}
       <div>
         <h3 className="text-lg font-extrabold uppercase">{title}</h3>
-        <span className="mt-2 font-normal text-zinc-600 text-sm leading-[0.8]">
+        <span className="mt-1 font-normal text-zinc-600 text-sm leading-[0.7]">
           {content}
         </span>
       </div>

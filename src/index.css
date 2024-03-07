@@ -58,6 +58,9 @@ input[type="file"]::file-selector-button {
   cursor: not-allowed;
   @apply bg-blue-400 text-gray-200 hover:bg-blue-400 text-white !important;
 }
-.textShade{
+.textShade {
   /* text-shadow: 1.5px 0.5px 1px #1113; */
 }
+/* .formGroup {
+  @apply flex items-center justify-between mb-1.5 w-full;
+} */

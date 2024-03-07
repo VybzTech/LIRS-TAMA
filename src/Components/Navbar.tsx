@@ -64,10 +64,10 @@ const Navbar = () => {
     <div id="Navbar" className="py-3 px-14">
       <Header />
       <div id="NavContent">
-        <h1 className="pt-4 my-6 headers">
+        <h1 className="pt-2 my-5 headers">
           TAX AUDIT MONITORING AGENT (TAMA) REGISTRATION
         </h1>
-        <span className="text-sm pb-6 text-zinc-500 inline-block font-light tracking-[0.4px]">
+        <span className="text-sm pb-5 text-zinc-500 inline-block font-light tracking-[0.4px]">
           Steps to Complete
         </span>
         {Navs.map((nav, id) => (
