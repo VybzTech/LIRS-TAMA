@@ -1,9 +1,7 @@
-import React from "react";
 import Logo from "../assets/images/Logo.png";
 
 const Header = () => {
   return (
-    // <header className=" shadow shadow-[0 2px 15px 2px]">
     <header className="my-6">
       <div className="flex ">
         <img

@@ -3,11 +3,7 @@ import { BsInfoCircle } from "react-icons/bs";
 import { useVerify } from "../context/VerificationContext.tsx";
 
 const DirectorForm = ({ showInfoImg }) => {
-  const { Verrors, setVerrors, Vtouched, setVtouched } = useVerify();
-  // console.log(Verrors);
-  // const submitForm = (e) => {
-  //   e.preventDefault();
-  // };
+  const { Verrors, Vtouched } = useVerify();
 
   return (
     <div>

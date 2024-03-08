@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
-import envelope from "../assets/images/Envelope.png";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useUpload } from "../context/UploadContext";
-import { useVerify } from "../context/VerificationContext";
 import { useStatus } from "../context/StatusContext";
+import envelope from "../assets/images/Envelope.png";
+import { useVerify } from "../context/VerificationContext";
 
 const Confirmation = () => {
   const { companyDets, uploads } = useUpload();

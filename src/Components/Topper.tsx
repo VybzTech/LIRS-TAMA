@@ -1,5 +1,4 @@
 import { IoIosArrowBack } from "react-icons/io";
-import React from "react";
 
 const Topper = ({ handlePrevious }: Function) => {
   return (

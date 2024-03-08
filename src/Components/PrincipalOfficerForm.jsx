@@ -3,8 +3,7 @@ import { BsInfoCircle } from "react-icons/bs";
 import { useVerify } from "../context/VerificationContext.tsx";
 
 const PrincipalOfficerForm = ({ showInfoImg }) => {
-  const { Verrors, setVerrors, Vtouched, setVtouched } = useVerify();
-  // console.log(Verrors, Vtouched);
+  const { Verrors, Vtouched } = useVerify();
   return (
     <div>
       <div className="mt-10">

@@ -1,24 +1,21 @@
-import DirectorDetails from "./DirectorDetails.tsx";
-import PrincipalOfficerDetails from "./PrincipalOfficerDetails.jsx";
+import * as Yup from "yup";
 import Topper from "./Topper.js";
 import { Form, Formik } from "formik";
-import * as Yup from "yup";
+import DirectorDetails from "./DirectorDetails.tsx";
 import { useStatus } from "../context/StatusContext.js";
 import { useVerify } from "../context/VerificationContext.tsx";
+import PrincipalOfficerDetails from "./PrincipalOfficerDetails.jsx";
 
 const Container2 = () => {
   const { setStatus } = useStatus();
-  const { Vdirectors, Vofficers } = useVerify<object>();
   const {
+    Vdirectors,
+    Vofficers,
     setVAerrors,
     VAtouched,
     setVAtouched,
     VAerrors,
-    // Vdirectors,
-    // setVdirectors,
-    // Vofficers,
-    // setVofficers,
-  } = useVerify();
+  } = useVerify<object>();
 
   const returnfullName: object = (arr: object[], name: string) => {
     return arr.filter((obj) => obj?.name === name)[0]?.info?.fullName;
@@ -40,11 +37,7 @@ const Container2 = () => {
     Officer3Details_ID: returnID(Vofficers, "officer 3"),
     Officer3Details: returnfullName(Vofficers, "officer 3"),
   };
-  // LA/TCC/42RF34DH34H9027M2D
-  // LA/TCC/DVFERFV3V13VREV3I
-  // LA/TCC/7M2DH34H902FDH34H
-  //  la/tcc/ADJHCV35324FR4B4487G4T
-  //  la/tcc/TEB3GF24fE4B4WFBEFU4fe
+
   const validationSchema = Yup.object().shape({
     director1Details_ID: Yup.string()
       .min(4, "Incomplete Payer ID")
@@ -83,31 +76,13 @@ const Container2 = () => {
       .required("Kindly verify your 3rd Officer's details"),
   });
 
-  // const handleValidation = (e) => {
-  //   e.preventDefault();
-  //   setStatus("Validated");
-  // };
-
   const handlePrevious = (e: unknown) => {
     e.preventDefault();
     setStatus("");
-    // console.log(Vdirectors);
-    // console.log(Vofficers);
   };
 
   const submitForm = async (values: object) => {
-    // (values) => {
-    // e.preventDefault();
-    // console.log("Values", values);
-
-    // try {
-    //   const response = await pullInfo(values);
-    //   console.log(response);
-    // } catch (error) {
-    //   console.error("Error validating info:", error);
-    // }
     setTimeout(() => {
-      console.log(JSON.stringify(values));
       setStatus("Validated");
     }, 2500);
   };
@@ -117,23 +92,14 @@ const Container2 = () => {
       <Topper handlePrevious={handlePrevious} />
       <div className="container 2">
         <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
+          key={"VerifiedForm"}
           validateOnChange
           onSubmit={submitForm}
-          // validateOnBlur={true}
+          initialValues={initialValues}
+          validationSchema={validationSchema}
         >
           {(formik) => {
-            const {
-              errors,
-              touched,
-              // handleSubmit,
-              isValid,
-              dirty,
-              // handleChange,
-            } = formik;
-            // console.log("errors", errors);
-            // console.log(touched);
+            const { errors, touched, isValid, dirty } = formik;
             setVAerrors(errors);
             setVAtouched(touched);
             return (
@@ -220,7 +186,6 @@ const Container2 = () => {
                     Previous
                   </button>
                   <button
-                    // onClick={handleValidation}
                     className={`bg-blue-500 rounded rounded-md font-semibold py-3.5 px-10
                      text-white ${!(dirty && isValid) ? "disabled-btn" : ""}`}
                   >

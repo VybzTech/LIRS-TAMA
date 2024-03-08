@@ -1,16 +1,15 @@
 import * as Yup from "yup";
 import Input from "./Input";
-import Toppest from "./Toppest.tsx";
-import { Field, Form, Formik } from "formik";
-import React, { useEffect, useState } from "react";
-import Requirements from "./Requirements.tsx";
-import { useStatus } from "../context/StatusContext.js";
-import { useVerify } from "../context/VerificationContext.tsx";
-import ErrorInfo from "./ErrorInfo.tsx";
-import { IoCheckmarkCircle } from "react-icons/io5";
-import { companyInfo } from "../Api.js";
 import toast from "react-hot-toast";
+import Toppest from "./Toppest.tsx";
+import { companyInfo } from "../Api.js";
+import ErrorInfo from "./ErrorInfo.tsx";
 import { ClipLoader } from "react-spinners";
+import { Field, Form, Formik } from "formik";
+import Requirements from "./Requirements.tsx";
+import React, { useEffect, useState } from "react";
+import { IoCheckmarkCircle } from "react-icons/io5";
+import { useStatus } from "../context/StatusContext.js";
 import { useUpload } from "../context/UploadContext.tsx";
 
 type CompanyProps = {
@@ -24,7 +23,6 @@ const Container3 = () => {
   const { status, setStatus } = useStatus();
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [Cname, setCname] = useState<boolean>(false);
-  const [changeCount, setChangeCount] = useState<number>(0);
   const {
     Uerrors,
     setUerrors,
@@ -33,29 +31,12 @@ const Container3 = () => {
     companyDets,
     setCompanyDets,
   } = useUpload();
-  // const [companyInformation, setCompanyInformation] = useState<CompanyProps[]>(
-  // const [submitted, setSubmitted] = useState<boolean>(false);
-  //   []
-  // );
 
   const handlePrevious = (e: any) => {
-    // e.preventDefault();
-    // console.log(status);
     setStatus("Verified");
-    // console.log(status);
   };
 
-  useEffect(() => {
-    // console.log(Cname);
-    // console.log(document?.getElementsByName("companyName")[0]);
-    // let CnameInput =
-    // document?.getElementsByName("companyName")[0];
-    // CnameInput.value = Cname
-    // console.log(document?.getElementsByName("companyName")[0]?.value);
-    // console.log(Uerrors, setUerrors, Utouched, setUtouched);
-    // console.log("companyDets", companyDets);
-    // name={"companyName"}
-  }, [status]);
+  useEffect(() => {}, [status]);
 
   const initialValues = {
     companyID: "",
@@ -65,11 +46,11 @@ const Container3 = () => {
     companyHistory: "",
     // REQUIREMENTS INIT VALUES
     cacDoc: "",
-    // financial3yrs: "",
-    // efccForm: "",
-    // formalLetter: "",
-    // regFee: "",
-    // businessPrem: "",
+    financial3yrs: "",
+    efccForm: "",
+    formalLetter: "",
+    regFee: "",
+    businessPrem: "",
   };
 
   const validationSchema = Yup.object().shape({
@@ -89,18 +70,15 @@ const Container3 = () => {
     companyHistory: Yup.string().min(10).trim().notRequired(),
     // REQUIREMENTS INIT VALUES
     cacDoc: Yup.mixed().required("Upload appropiate document"),
-    // financial3yrs: Yup.mixed().required("Upload appropiate document"),
-    // efccForm: Yup.mixed().required("Upload appropiate document"),
-    // formalLetter: Yup.mixed().required("Upload appropiate document"),
-    // regFee: Yup.mixed().required("Upload appropiate document"),
-    // businessPrem: Yup.mixed().required("Upload appropiate document"),
+    financial3yrs: Yup.mixed().required("Upload appropiate document"),
+    efccForm: Yup.mixed().required("Upload appropiate document"),
+    formalLetter: Yup.mixed().required("Upload appropiate document"),
+    regFee: Yup.mixed().required("Upload appropiate document"),
+    businessPrem: Yup.mixed().required("Upload appropiate document"),
   });
   const submitForm = async (values, actions) => {
     setSubmitted(true);
-    // setStatus("Uploaded");
-    // console.log("Our submit Values - ", values);
     setCompanyDets(values);
-    // console.log("companyDets - Submit", companyDets);
     setTimeout(() => {
       setSubmitted(false);
       setStatus("Uploaded");
@@ -115,31 +93,15 @@ const Container3 = () => {
       shouldValidate?: boolean | undefined
     ) => void
   ) => {
-    // setChangeCount((prev) => prev + 1);
-    // console.log(changeCount);
-    // console.log(e?.target?.value);
-    // const manageID = (e: unknown) => {
-    // console.log("performing side effects");
-    // console.log("Changed Value", e?.target?.value);
-    //run side effects here
     let response;
     try {
       response = await companyInfo();
-      // console.log("RES", response);
       // PULLED COMPANY INFO
-
       const compInfo: CompanyProps[] = response?.filter(
         (res) => res?.Cid?.toLowerCase() === e?.target?.value.toLowerCase()
       );
-      // console.log("company Information", compInfo);
-      // console.log(companyInformation)
-      // setCompanyInformation(compInfo);
-      // console.log(companyInformation)
-      // console.log(companyInformation);
-      // console.log(compInfo.length);
       if (compInfo.length > 0) {
         const { Cid, companyMail, companyName, companyNo } = compInfo[0];
-        // console.table(Cid);
         fieldSetter("companyName", companyName, true);
         fieldSetter("companyNo", companyNo, true);
         fieldSetter("companyEmail", companyMail, true);
@@ -148,14 +110,10 @@ const Container3 = () => {
         fieldSetter("companyName", "", false);
         fieldSetter("companyNo", "", false);
         fieldSetter("companyEmail", "", false);
-        // if (changeCount > 10) {
         toast.success("This company information has not been pulled", {
           position: "top-right",
         });
         setCname(false);
-        //   console.log("This company information....");
-        //   setChangeCount((prev) => prev - 5);
-        // }
       }
     } catch (err) {
       console.error("Error validating info:", err);
@@ -184,27 +142,17 @@ const Container3 = () => {
             validationSchema={validationSchema}
             validateOnChange
             onSubmit={submitForm}
-            // enableReinitialize={false}
             key={"UploadForm"}
-            // validateOnBlur={true}
           >
             {(formik) => {
               const {
                 errors,
-                // isSubmitting,
                 touched,
-                values,
                 setFieldValue,
-                // handleSubmit,
                 handleBlur,
-                // handleChange,
                 isValid,
                 dirty,
-                // handleChange,
               } = formik;
-              // console.log(isSubmitting);
-              // console.log(values);
-              // setSubmitted(isSubmitting);
               setUerrors(errors);
               setUtouched(touched);
               return (
@@ -242,10 +190,6 @@ const Container3 = () => {
                             handleBlur(e);
                             manageID(e, setFieldValue);
                           }}
-                          // onChange={(e: unknown) => {
-                          //   handleChange(e);
-                          //   manageID(e, setFieldValue);
-                          // }}
                         />
                         {Cname && (
                           <IoCheckmarkCircle className="w-7 h-7 fill-green-600 mr-[-1.8rem]" />

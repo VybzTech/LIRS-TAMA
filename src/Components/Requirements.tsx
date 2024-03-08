@@ -2,7 +2,7 @@ import UploadDoc from "./UploadDoc";
 import { useUpload } from "../context/UploadContext.tsx";
 
 const Requirements = () => {
-  const { Uerrors, setUerrors, Utouched, setUtouched } = useUpload();
+  const { Uerrors, Utouched } = useUpload();
 
   const myArray: {
     name: string;
@@ -59,10 +59,10 @@ const Requirements = () => {
         <UploadDoc
           key={id}
           id={id + 1}
-          title={item?.title}
-          name={item?.name}
-          errorMsg={item?.errorMsg}
           err={item?.err}
+          name={item?.name}
+          title={item?.title}
+          errorMsg={item?.errorMsg}
         />
       ))}
     </>

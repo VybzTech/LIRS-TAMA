@@ -10,9 +10,6 @@ type uploadDoc = {
 };
 
 const UploadDoc = ({ id, title, name, err, errorMsg }: uploadDoc) => {
-  // const uploadFile = (target) => {
-  //   document.getElementById("file-name").innerHTML = target.files[0].name;
-  // };
   return (
     <div className="mt-4 mb-8 relative w-full">
       <div className="flex justify-between pr-5">
@@ -41,23 +38,6 @@ const UploadDoc = ({ id, title, name, err, errorMsg }: uploadDoc) => {
         </div>
         {err && <ErrorInfo info={errorMsg} />}
       </div>
-
-      {/* <label htmlFor="file" className="flex gap-4">
-        <span
-          id="file-name"
-          className="file-box inline-block w-[30%] text-slate-500 border border-md px-5 py-3 rounded"
-          //  h-[calc(1rem - 2px)]"
-        >
-          No file chosen
-        </span>
-        <button className="bg-blue-600 px-6 py-1.5 text-white border rounded rounded-md">
-          Upload
-        </button>
-      </label> */}
-      {/* <label htmlFor={title}> */}
-      {/* </label> */}
-      {/* <Input label="" placeholder={No file chosen} /> */}
-      {/* <button className="bg-green-500 text-white rounded rounded-md px-5 py-3 w-full text-sm capitalize font-semibold my-5">Upload</button> */}
     </div>
   );
 };

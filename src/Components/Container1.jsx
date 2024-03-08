@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 import Top from "./Top.tsx";
-import {  useState } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
 import { pullInfo } from "../Api.js";
 import { Form, Formik } from "formik";
@@ -51,7 +51,7 @@ const Container1 = () => {
 
   const returnTCCInfo = (arr, name) =>
     arr.filter((obj) => obj?.name === name)[0]?.info?.tccNo;
-  
+
   const initialValues = {
     director1: returnTCCInfo(Vdirectors, "director 1") ?? "",
     director2: returnTCCInfo(Vdirectors, "director 2") ?? "",
@@ -68,33 +68,22 @@ const Container1 = () => {
       .matches(/^la\/tcc\/[a-zA-Z0-9]{5,}$/i, "Invalid TCC format")
       .required("Kindly verify your 2nd Director's TCC no"),
     Officer1: Yup.string()
-      // .min(8, "Incomplete")
       .matches(/^la\/tcc\/[a-zA-Z0-9]{5,}$/i, "Invalid TCC format")
       .required("Kindly verify your 1st Officer's TCC no"),
     Officer2: Yup.string()
-      // .min(8, "Incomplete")
       .matches(/^la\/tcc\/[a-zA-Z0-9]{5,}$/i, "Invalid TCC format")
       .required("Kindly verify your 2nd Officer's TCC no"),
     Officer3: Yup.string()
-      // .min(8, "Incomplete")
       .matches(/^la\/tcc\/[a-zA-Z0-9]{5,}$/i, "Invalid TCC format")
       .required("Kindly verify your 3rd Officer2's TCC no"),
   });
 
-  // const submitForm = Sync (values) => {
   const submitForm = async (values, actions) => {
-    // (values) => {
-    // e.preventDefault();
-    console.log(values);
-    // console.log(actions);
+    //    SET SUBMITTED STATE ONCE BUTTON IS CLICKED
     setSubmitted(true);
-    // setVdirectors(values);
-    // response = [{"tccNo": "LA/TCC/2FDH34HJ56NF7M90","PayerID": "N-417293",
-    // values = {director1: "LA/TCC/2FDH34HJ56NF7M90", director2: "LA/TCC/VUJBS41SJFKGV7293",
     let response;
     try {
       response = await pullInfo(values);
-      // console.log(response);
     } catch (err) {
       console.error("Error validating info:", err);
       toast.error("Error Validating TCC nos", { position: "top-right" });
@@ -102,6 +91,7 @@ const Container1 = () => {
       throw err;
     }
 
+    //  CREATE DIRECTOR & OFFICER OBJECTS FROM VERIFIED TCC NOs
     let Director1Info = {
       name: "director 1",
       info: response?.filter((res) => res?.tccNo === values?.director1)[0],
@@ -122,18 +112,12 @@ const Container1 = () => {
       name: "officer 3",
       info: response?.filter((res) => res?.tccNo === values?.Officer3)[0],
     };
-    // setVdirectors( prev=>[...prev, Director1Info,Director2Info]);
+
+    //  SET OBJECTS AS CONTEXT VARIABLES
     setVdirectors([Director1Info, Director2Info]);
     setVofficers([Officer1Info, Officer2Info, Officer3Info]);
-    // console.log("Director1Info",Director1Info);
-    // check director1,.... values against provided Info from the DB
-    // and then assign verification variables setting the initial
-    // values as well in container 2...
 
     setTimeout(() => {
-      // alert(JSON.stringify(values, null, 2));
-      // actions.setSubmitting(false);
-      console.log(JSON.stringify(values));
       setSubmitted(false);
       setStatus("Verified");
     }, 750);
@@ -144,31 +128,18 @@ const Container1 = () => {
       <Top />
       <div className="container 1">
         <Formik
+          key={"VerificationForm"}
+          validateOnChange
           initialValues={initialValues}
           validationSchema={validationSchema}
-          validateOnChange
           onSubmit={submitForm}
-          // enableReinitialize={false}
-          key={"VerificationForm"}
-          // validateOnBlur={true}
         >
           {(formik) => {
-            const {
-              errors,
-              // isSubmitting,
-              touched,
-              // handleSubmit,
-              isValid,
-              dirty,
-              // handleChange,
-            } = formik;
-            // console.log(isSubmitting);
-            // setSubmitted(isSubmitting);
+            const { errors, touched, isValid, dirty } = formik;
             setVerrors(errors);
             setVtouched(touched);
             return (
               <Form>
-                {/* <FormikPersist ></FormikPersist> */}
                 <DirectorForm showInfoImg={showInfoImg} />
                 <PrincipalOfficerForm showInfoImg={showInfoImg} />
                 <button
@@ -178,8 +149,6 @@ const Container1 = () => {
                   font-semibold my-5 transition-all ease duration-300
                   ease-in-out tracking-[0.1px] hover:bg-blue-700
                   cursor-pointer ${!(dirty && isValid) ? "disabled-btn" : ""}`}
-                  // disabled={!(dirty && isValid)}
-                  // disabled={false}
                 >
                   {submitted ? (
                     <>

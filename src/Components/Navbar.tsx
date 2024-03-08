@@ -4,11 +4,8 @@ import Nav from "./Nav";
 import { useStatus } from "../context/StatusContext.js";
 
 const Navbar = () => {
-  // const [steps, setSteps] = useState<number>(0);
+  const { status } = useStatus();
 
-  const { status, setStatus } = useStatus();
-
-  // ('Verified', 'Validated', 'Uploaded', 'Completed') Verification
   const Navs = [
     {
       id: 1,
@@ -47,14 +44,11 @@ const Navbar = () => {
 
   useEffect(() => {
     window?.addEventListener("scroll", () => {
-      // console.log(window?.screen.availHeight*0.1);
-      // window?.scrollY > 110
       window?.scrollY > window?.screen.availHeight * 0.1
         ? document?.getElementById("NavContent")?.classList?.add("stick")
         : document?.getElementById("NavContent")?.classList?.remove("stick");
     });
     // IMPLEMEMNT STICKY NAVBAR ONCE SCROLLTOP IS >
-
     return () => {
       window?.removeEventListener("scroll", () => {});
     };

@@ -1,4 +1,3 @@
-import React from "react";
 import Input from "./Input";
 import { useVerify } from "../context/VerificationContext";
 
@@ -25,7 +24,6 @@ const PrincipalOfficerDetails = ({
   errMsg,
   idErrMsg,
 }: ODetailsProps) => {
-  const { VAerrors, VAtouched } = useVerify();
   return (
     <div>
       <div className="detailsHead font-semibold text-sm">

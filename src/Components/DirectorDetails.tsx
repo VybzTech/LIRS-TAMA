@@ -23,7 +23,6 @@ const DirectorDetails = ({
   errMsg,
   idErrMsg,
 }: DDetailsProps) => {
-  // const { VAerrors, VAtouched } = useVerify();
   return (
     <div>
       <div className="detailsHead font-medium text-sm text-gray-800">
@@ -31,13 +30,6 @@ const DirectorDetails = ({
         <hr />
       </div>
       <div className="flexMe gap-9 mt-4 mb-8">
-        {/* <Input
-          name="director1"
-          label="Director 1"
-          placeholder="e.g LA/TCC/000XXXXXXX"
-          errorMsg={Verrors?.director1}
-          err={Verrors?.director1 && Vtouched?.director1}
-        /> */}
         <Input
           name={name}
           label="Payer ID"
