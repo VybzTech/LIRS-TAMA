@@ -1,8 +1,8 @@
 import UploadDoc from "./UploadDoc";
-import { useVerify } from "../context/VerificationContext.tsx";
+import { useUpload } from "../context/UploadContext.tsx";
 
 const Requirements = () => {
-  const { Uerrors, setUerrors, Utouched, setUtouched } = useVerify();
+  const { Uerrors, setUerrors, Utouched, setUtouched } = useUpload();
 
   const myArray: {
     name: string;

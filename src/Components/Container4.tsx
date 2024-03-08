@@ -10,17 +10,29 @@ import { useStatus } from "../context/StatusContext.js";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { Field, Form, Formik } from "formik";
+import { useUpload } from "../context/UploadContext.tsx";
+import { useState } from "react";
+import { ClipLoader } from "react-spinners";
 
 const Container4 = () => {
   const { status, setStatus } = useStatus();
 
   const navigate = useNavigate();
+  const [submitted, setSubmitted] = useState<boolean>(false);
 
-  const { U2errors, setU2errors, U2touched, setU2touched } = useVerify();
+  const {
+    uploads,
+    setUploads,
+    U2errors,
+    setU2errors,
+    U2touched,
+    setU2touched,
+  } = useUpload();
   // const handleCompletion = (e: any) => {
   //   e.preventDefault();
   //   setStatus("Completed");
   // };
+  // console.log(companyDets);
   const handlePrevious = (e: any) => {
     e.preventDefault();
     setStatus("Validated");
@@ -34,10 +46,17 @@ const Container4 = () => {
     techEvidence: Yup.mixed().required("Upload appropiate document"),
   });
   const submitForm = async (values, actions) => {
-    console.log(values);
+    // console.log(values);
+    setSubmitted(true);
+    // setStatus("Uploaded");
+    // console.log("Our submit Values - ", values);
+    // console.log("companyDets - Submit", companyDets);
+
     // console.log(actions);
-    setStatus("Completed");
+    setUploads(values);
     setTimeout(() => {
+      setSubmitted(false);
+      setStatus("Completed");
       navigate("/Completed");
     }, 2500);
     // setTimeout(() => {Navigate({ to: "/Completed" })}, 500);
@@ -90,7 +109,19 @@ const Container4 = () => {
                   className="bg-blue-500 rounded rounded-md font-semibold py-3.5 px-10 text-white"
                   type="submit"
                 >
-                  Complete
+                  {submitted ? (
+                    <>
+                      Please wait
+                      <ClipLoader
+                        size={13}
+                        className="ml-1.5"
+                        speedMultiplier={0.7}
+                        color="#fff"
+                      />
+                    </>
+                  ) : (
+                    "Complete"
+                  )}
                 </button>
                 {/* <Link
                   to={"/Completed"}

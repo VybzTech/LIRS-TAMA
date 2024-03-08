@@ -10,6 +10,8 @@ import ErrorInfo from "./ErrorInfo.tsx";
 import { IoCheckmarkCircle } from "react-icons/io5";
 import { companyInfo } from "../Api.js";
 import toast from "react-hot-toast";
+import { ClipLoader } from "react-spinners";
+import { useUpload } from "../context/UploadContext.tsx";
 
 type CompanyProps = {
   Cid: string;
@@ -20,19 +22,27 @@ type CompanyProps = {
 
 const Container3 = () => {
   const { status, setStatus } = useStatus();
-  const [submitted, setSubmitted] = useState(false);
-  const { Uerrors, setUerrors, Utouched, setUtouched } = useVerify();
-  // const [Cname, setCname] = useState<string>("");
+  const [submitted, setSubmitted] = useState<boolean>(false);
+  const [Cname, setCname] = useState<boolean>(false);
   const [changeCount, setChangeCount] = useState<number>(0);
+  const {
+    Uerrors,
+    setUerrors,
+    Utouched,
+    setUtouched,
+    companyDets,
+    setCompanyDets,
+  } = useUpload();
   // const [companyInformation, setCompanyInformation] = useState<CompanyProps[]>(
+  // const [submitted, setSubmitted] = useState<boolean>(false);
   //   []
   // );
 
   const handlePrevious = (e: any) => {
     // e.preventDefault();
-    console.log(status);
+    // console.log(status);
     setStatus("Verified");
-    console.log(status);
+    // console.log(status);
   };
 
   useEffect(() => {
@@ -42,7 +52,8 @@ const Container3 = () => {
     // document?.getElementsByName("companyName")[0];
     // CnameInput.value = Cname
     // console.log(document?.getElementsByName("companyName")[0]?.value);
-    // console.log(CnameInput);
+    // console.log(Uerrors, setUerrors, Utouched, setUtouched);
+    // console.log("companyDets", companyDets);
     // name={"companyName"}
   }, [status]);
 
@@ -54,11 +65,11 @@ const Container3 = () => {
     companyHistory: "",
     // REQUIREMENTS INIT VALUES
     cacDoc: "",
-    financial3yrs: "",
-    efccForm: "",
-    formalLetter: "",
-    regFee: "",
-    businessPrem: "",
+    // financial3yrs: "",
+    // efccForm: "",
+    // formalLetter: "",
+    // regFee: "",
+    // businessPrem: "",
   };
 
   const validationSchema = Yup.object().shape({
@@ -73,21 +84,27 @@ const Container3 = () => {
       .email("Invalid email format")
       .required("Kindly provide your Company's email"),
     companyNo: Yup.string()
-      .matches(/^(0|\+?234)?\d{9,}$/, "Invalid Phone number")
-      .required("Kindly provide your Company's phone number"),
+      .matches(/^(0|\+?234)?\d{9,}$/, "Invalid Phone No")
+      .required("Kindly provide your Company's phone No"),
     companyHistory: Yup.string().min(10).trim().notRequired(),
     // REQUIREMENTS INIT VALUES
     cacDoc: Yup.mixed().required("Upload appropiate document"),
-    financial3yrs: Yup.mixed().required("Upload appropiate document"),
-    efccForm: Yup.mixed().required("Upload appropiate document"),
-    formalLetter: Yup.mixed().required("Upload appropiate document"),
-    regFee: Yup.mixed().required("Upload appropiate document"),
-    businessPrem: Yup.mixed().required("Upload appropiate document"),
+    // financial3yrs: Yup.mixed().required("Upload appropiate document"),
+    // efccForm: Yup.mixed().required("Upload appropiate document"),
+    // formalLetter: Yup.mixed().required("Upload appropiate document"),
+    // regFee: Yup.mixed().required("Upload appropiate document"),
+    // businessPrem: Yup.mixed().required("Upload appropiate document"),
   });
   const submitForm = async (values, actions) => {
     setSubmitted(true);
-    console.log(values);
-    setStatus("Uploaded");
+    // setStatus("Uploaded");
+    // console.log("Our submit Values - ", values);
+    setCompanyDets(values);
+    // console.log("companyDets - Submit", companyDets);
+    setTimeout(() => {
+      setSubmitted(false);
+      setStatus("Uploaded");
+    }, 1750);
   };
 
   const manageID = async (
@@ -114,19 +131,19 @@ const Container3 = () => {
       const compInfo: CompanyProps[] = response?.filter(
         (res) => res?.Cid?.toLowerCase() === e?.target?.value.toLowerCase()
       );
-      console.log("company Information", compInfo);
+      // console.log("company Information", compInfo);
       // console.log(companyInformation)
       // setCompanyInformation(compInfo);
       // console.log(companyInformation)
       // console.log(companyInformation);
-      console.log(compInfo.length);
+      // console.log(compInfo.length);
       if (compInfo.length > 0) {
         const { Cid, companyMail, companyName, companyNo } = compInfo[0];
-        console.table(Cid);
-        // setCname(companyName);
+        // console.table(Cid);
         fieldSetter("companyName", companyName, true);
         fieldSetter("companyNo", companyNo, true);
         fieldSetter("companyEmail", companyMail, true);
+        setCname(true);
       } else if (compInfo.length < 1) {
         fieldSetter("companyName", "", false);
         fieldSetter("companyNo", "", false);
@@ -135,6 +152,7 @@ const Container3 = () => {
         toast.success("This company information has not been pulled", {
           position: "top-right",
         });
+        setCname(false);
         //   console.log("This company information....");
         //   setChangeCount((prev) => prev - 5);
         // }
@@ -229,7 +247,9 @@ const Container3 = () => {
                           //   manageID(e, setFieldValue);
                           // }}
                         />
-                        <IoCheckmarkCircle className="w-7 h-7 fill-green-600 mr-[-1.8rem]" />
+                        {Cname && (
+                          <IoCheckmarkCircle className="w-7 h-7 fill-green-600 mr-[-1.8rem]" />
+                        )}
                       </div>
                     </div>
                     <Input
@@ -280,7 +300,20 @@ const Container3 = () => {
                       className={`bg-blue-500 rounded rounded-md font-semibold py-3.5 px-10
                       text-white ${!(dirty && isValid) ? "disabled-btn" : ""}`}
                     >
-                      Continue
+                      {}
+                      {submitted ? (
+                        <>
+                          Please wait
+                          <ClipLoader
+                            size={13}
+                            className="ml-1.5"
+                            speedMultiplier={0.7}
+                            color="#fff"
+                          />
+                        </>
+                      ) : (
+                        "Continue"
+                      )}
                     </button>
                   </div>
                 </Form>

@@ -11,10 +11,10 @@ export const VerificationProvider = ({ children }: any) => {
   const [Vofficers, setVofficers] = useState<object[]>([]);
   const [VAerrors, setVAerrors] = useState<object>({});
   const [VAtouched, setVAtouched] = useState<object>({});
-  const [Uerrors, setUerrors] = useState<object>({});
-  const [Utouched, setUtouched] = useState<object>({});
-  const [U2errors, setU2errors] = useState<object>({});
-  const [U2touched, setU2touched] = useState<object>({});
+  // const [Uerrors, setUerrors] = useState<object>({});
+  // const [Utouched, setUtouched] = useState<object>({});
+  // const [U2errors, setU2errors] = useState<object>({});
+  // const [U2touched, setU2touched] = useState<object>({});
 
   return (
     <VerificationContext.Provider
@@ -31,14 +31,14 @@ export const VerificationProvider = ({ children }: any) => {
         setVAerrors,
         VAtouched,
         setVAtouched,
-        Uerrors,
-        setUerrors,
-        Utouched,
-        setUtouched,
-        U2errors,
-        setU2errors,
-        U2touched,
-        setU2touched,
+        // Uerrors,
+        // setUerrors,
+        // Utouched,
+        // setUtouched,
+        // U2errors,
+        // setU2errors,
+        // U2touched,
+        // setU2touched,
       }}
     >
       {children}

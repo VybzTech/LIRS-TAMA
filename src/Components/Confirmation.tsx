@@ -1,8 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import envelope from "../assets/images/Envelope.png";
 import { Link } from "react-router-dom";
+import { useUpload } from "../context/UploadContext";
+import { useVerify } from "../context/VerificationContext";
+import { useStatus } from "../context/StatusContext";
 
 const Confirmation = () => {
+  const { companyDets, uploads } = useUpload();
+  const { Vdirectors, Vofficers } = useVerify();
+
+  const { status } = useStatus();
+
+  useEffect(() => {
+    console.log(
+      "status",
+      status,
+      "Vdirectors",
+      Vdirectors,
+      "Vofficers",
+      Vofficers,
+      "companyDets",
+      companyDets,
+      "uploads",
+      uploads
+    );
+  }, []);
+
   return (
     <div className="w-full h-full mt-20 flex flex-col items-center justify center">
       <img className="w-36" src={envelope} alt="Mail template logo" />
